@@ -2,5 +2,19 @@
 name = "unicola"
 version = "0.0.0"
 authors = ["Chiu-Hsiang Hsu <wdv4758h@gmail.com>"]
+build = "build.rs"
+
+[workspace]
+members = ["src/core", "src/codegen"]
+
+[build-dependencies]
+unicola_codegen = { path = "src/codegen" }
 
 [dependencies]
+phf = "0.7.18"
+unicola_core = { path = "src/core" }
+
+[features]
+default = ["width"]
+pregen = []     # use pre-generated code
+width = []
