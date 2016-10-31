@@ -14,7 +14,7 @@ pub fn unicode_east_asian_width(c: char) -> EastAsianWidth {
 include!(concat!(env!("OUT_DIR"), "/east_asian_width_table.rs"));
 
 #[cfg(feature = "pregen")]
-include!("generated/width_table.rs");
+include!("generated/east_asian_width_table.rs");
 
 
 #[test]
