@@ -37,7 +37,7 @@ pub fn generate_width_table() {
             let (start, end) = (tmp.next().unwrap(), tmp.next().unwrap());
             let (start, end) = (u32::from_str_radix(start, 16).unwrap(),
                                 u32::from_str_radix(end, 16).unwrap());
-            for i in start..end {
+            for i in start..end+1 {
                 codegen.entry(i,
                               format!("EastAsianWidth::{}", w).as_str());
             }

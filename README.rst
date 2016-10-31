@@ -52,6 +52,14 @@ Run:
     ﹁ => W
     ￣ => F
     ) => Na
+    $ ./target/release/examples/east_asian_width "Σ(￣□￣；"
+    Σ => A
+    ( => Na
+    ￣ => F
+    □ => A
+    ￣ => F
+    ； => F
+
 
 Verify:
 
@@ -61,6 +69,8 @@ Verify:
     ('W', 'W', 'W', 'W')
     $ python -c "import unicodedata; print(tuple(map(unicodedata.east_asian_width, '(￣﹁￣)')))"
     ('Na', 'F', 'W', 'F', 'Na')
+    $ python -c "import unicodedata; print(tuple(map(unicodedata.east_asian_width, 'Σ(￣□￣；')))"
+    ('A', 'Na', 'F', 'A', 'F', 'F')
 
 
 BYOB (Build Your Own Binary)
