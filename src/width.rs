@@ -2,7 +2,7 @@ use unicola_core::*;
 use phf;
 
 
-pub fn unicode_east_asian_width(c: char) -> EastAsianWidth {
+pub fn east_asian_width(c: char) -> EastAsianWidth {
     // PHF map
     *EAST_ASIAN_WIDTH_TABLE.get(&(c as u32)).unwrap()
 }
@@ -19,6 +19,6 @@ include!("generated/east_asian_width_table.rs");
 
 #[test]
 fn test_east_asian_width() {
-    assert_eq!(EastAsianWidth::Na, unicode_east_asian_width('a'));
-    assert_eq!(EastAsianWidth::W, unicode_east_asian_width('測'));
+    assert_eq!(EastAsianWidth::Na, east_asian_width('a'));
+    assert_eq!(EastAsianWidth::W, east_asian_width('測'));
 }
