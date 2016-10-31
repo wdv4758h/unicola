@@ -15,6 +15,7 @@ phf = "0.7.18"
 unicola_core = { path = "src/core" }
 
 [features]
-default = ["width"]
+default = ["width", "eac"]
 pregen = []     # use pre-generated code
 width = []
+eac = ["unicola_codegen/eac"]

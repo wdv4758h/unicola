@@ -5,6 +5,8 @@ use std::io::BufWriter;
 use std::path::Path;
 
 use phf_codegen;
+#[cfg(feature = "eac")]
+use csv;
 
 
 /// Generate the table of Unicode East Asian Width,
@@ -56,4 +58,30 @@ pub fn generate_unicode_version() {
     let path = Path::new(&env::var("OUT_DIR").unwrap()).join("version.rs");
     let mut file = BufWriter::new(File::create(&path).unwrap());
     write!(&mut file, "pub const UNICODE_VERSION: (u64, u64, u64) = (9, 0, 0);").unwrap();
+}
+
+/// Generate the table of Emoji Alpha Codes,
+/// this table will be included in the later compilation
+#[cfg(feature = "eac")]
+pub fn generate_emoji_codes() {
+    let path = Path::new(&env::var("OUT_DIR").unwrap()).join("eac.rs");
+    let mut file = BufWriter::new(File::create(&path).unwrap());
+    write!(&mut file, "static EMOJI_ALPHA_CODES: phf::Map<&'static str, &'static str> = ").unwrap();
+    let mut rdr = csv::Reader::from_file("data/eac.csv").unwrap();
+    let mut codegen = phf_codegen::Map::new();
+    for record in rdr.decode() {
+        use std::char;
+        let (codepoint, _, code, alias): (String, String, String, String) = record.unwrap();
+        let codepoint = codepoint.split('-')
+                                 .map(|c| char::from_u32(u32::from_str_radix(c, 16).unwrap()).unwrap())
+                                 .collect::<String>();
+        let codepoint = format!("\"{}\"", codepoint);
+        codegen.entry(code, codepoint.as_str());
+        for s in alias.split('|')
+                      .filter(|s| !s.is_empty()) {
+            codegen.entry(s.to_string(), codepoint.as_str());
+        }
+    }
+    codegen.build(&mut file).unwrap();
+    write!(&mut file, ";\n").unwrap();
 }

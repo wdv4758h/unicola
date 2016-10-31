@@ -13,4 +13,8 @@ fn main() {
     if cfg!(feature="width") {
         generate_width_table();
     }
+
+    if cfg!(feature="eac") {
+        generate_emoji_codes();
+    }
 }
