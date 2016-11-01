@@ -9,7 +9,7 @@ pub fn emoji(code: &str) -> Option<&&str> {
 
 
 /// Emoji Alpha Codes
-/// e.g. "static EMOJI_ALPHA_CODES: pdf::Map<str, char> = ... ;"
+/// e.g. "static EMOJI_ALPHA_CODES: pdf::Map<&'static str, &'static str> = ... ;"
 #[cfg(not(feature = "pregen"))]
 include!(concat!(env!("OUT_DIR"), "/eac.rs"));
 
