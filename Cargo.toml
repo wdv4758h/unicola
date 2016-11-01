@@ -2,6 +2,10 @@
 name = "unicola"
 version = "0.0.0"
 authors = ["Chiu-Hsiang Hsu <wdv4758h@gmail.com>"]
+license = "Apache-2.0"
+readme = "README.rst"
+repository = "https://github.com/wdv4758h/unicola/"
+keywords = ["unicode", "emoji"]
 build = "build.rs"
 
 [workspace]

@@ -23,6 +23,7 @@ Features
 * Emoji Alpha Codes to Emoji transform
 
 
+
 Try it!
 ========================================
 
@@ -137,20 +138,48 @@ and it will generate lookup table with perfect hash function at compile time.
 Related Resource
 ========================================
 
+Spec, Data, Documentation
+------------------------------
+
 * `Unicode® Emoji <http://unicode.org/emoji/>`_ - `Data Files <http://www.unicode.org/Public/emoji/latest/>`_
 * `Unicode Technical Reports <http://www.unicode.org/reports/>`_
     - `Unicode Character Database <http://www.unicode.org/reports/tr44/>`_ - `Data Files <http://www.unicode.org/Public/UCD/latest/ucd/>`_
 * `Emoji Alpha Codes <https://github.com/Ranks/emoji-alpha-codes>`_ - `Data File <https://github.com/Ranks/emoji-alpha-codes/raw/master/eac.csv>`_
 * `Python - unicodedata — Unicode Database <https://docs.python.org/3/library/unicodedata.html>`_
+* `Wikipedia - Unicode equivalence <https://en.wikipedia.org/wiki/Unicode_equivalence>`_
+
+
+Projects
+------------------------------
+
+* Rust Compiler
+    - `src/etc/unicode.py <https://github.com/rust-lang/rust/blob/master/src/etc/unicode.py>`_
+    - `src/etc/char_private.py <https://github.com/rust-lang/rust/blob/master/src/etc/char_private.py>`_
+    - `librustc_unicode <https://github.com/rust-lang/rust/tree/master/src/librustc_unicode>`_
+    - `src/libstd/sys/common/wtf8.rs <https://github.com/rust-lang/rust/blob/master/src/libstd/sys/common/wtf8.rs>`_
+    - `Efficient trie lookup for boolean Unicode properties <https://github.com/rust-lang/rust/pull/33098>`_
+* CPython
+    - `Tools/unicode/makeunicodedata.py <https://github.com/python/cpython/blob/master/Tools/unicode/makeunicodedata.py>`_
+    - `Modules/unicodedata.c <https://github.com/python/cpython/blob/master/Modules/unicodedata.c>`_
+    - `Modules/unicodedata_db.h <https://github.com/python/cpython/blob/master/Modules/unicodedata_db.h>`_
+    - `Modules/unicodename_db.h <https://github.com/python/cpython/blob/master/Modules/unicodename_db.h>`_
+    - `Lib/test/test_unicodedata.py <https://github.com/python/cpython/blob/master/Lib/test/test_unicodedata.py>`_
+* `libucd <https://github.com/sourtin/libucd>`_ - exposing much of the Unicode Character Database
+* `unicode-bidi <https://github.com/servo/unicode-bidi>`_ - implements the Unicode Bidirectional Algorithm for display of mixed right-to-left and left-to-right text
+
 
 
 Notice
 ========================================
 
+I've only tested on my x86_64 Linux. If things don't work properly on some platforms, please tell me.
+
 
 
 License
 ========================================
+
+``unicola`` is licensed under the Apache-2.0 License - see the ``LICENSE`` file for details
 
 
 
@@ -158,3 +187,6 @@ Special Thanks
 ========================================
 
 * `Rust-PHF <https://github.com/sfackler/rust-phf>`_ - for compile time lookup tables generation
+* `Unicode Consortium <http://www.unicode.org/>`_
+* `Rust Team <https://www.rust-lang.org/team.html>`_
+* and every project I've used
