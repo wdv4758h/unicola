@@ -4,6 +4,7 @@ version = "0.0.0"
 authors = ["Chiu-Hsiang Hsu <wdv4758h@gmail.com>"]
 
 [dependencies]
+hyper = "0.9.4"
 phf_codegen = "0.7.18"
 csv = { version = "0.14.7", optional = true }
 

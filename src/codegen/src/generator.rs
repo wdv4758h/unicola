@@ -1,17 +1,35 @@
 use std::env;
-use std::fs::File;
+use std::fs::{File, metadata};
 use std::io::prelude::*;
 use std::io::BufWriter;
 use std::path::Path;
 
+use hyper;
 use phf_codegen;
 #[cfg(feature = "eac")]
 use csv;
 
 
+fn fetch_data(filename: &str, url: &str) {
+    if metadata(format!("data/{}", filename)).is_ok() {
+        return;
+    }
+
+    println!("Downloading '{}' from '{}'", filename, url);
+    let client = hyper::Client::new();
+    let mut res = client.get(url).send().unwrap();
+    let mut data = String::new();
+    let _ = res.read_to_string(&mut data);
+    let path = Path::new("data").join(filename);
+    let mut file = BufWriter::new(File::create(&path).unwrap());
+    let _ = file.write_all(data.as_bytes());
+}
+
 /// Generate the table of Unicode East Asian Width,
 /// this table will be included in the later compilation
 pub fn generate_width_table() {
+    fetch_data("EastAsianWidth.txt", "http://www.unicode.org/Public/UCD/latest/ucd/EastAsianWidth.txt");
+
     let path = Path::new(&env::var("OUT_DIR").unwrap()).join("east_asian_width_table.rs");
     let mut file = BufWriter::new(File::create(&path).unwrap());
 
@@ -64,6 +82,8 @@ pub fn generate_unicode_version() {
 /// this table will be included in the later compilation
 #[cfg(feature = "eac")]
 pub fn generate_emoji_codes() {
+    fetch_data("eac.csv", "https://github.com/Ranks/emoji-alpha-codes/raw/master/eac.csv");
+
     let path = Path::new(&env::var("OUT_DIR").unwrap()).join("eac.rs");
     let mut file = BufWriter::new(File::create(&path).unwrap());
     write!(&mut file, "static EMOJI_ALPHA_CODES: phf::Map<&'static str, &'static str> = ").unwrap();

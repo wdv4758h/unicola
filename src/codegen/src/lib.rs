@@ -1,3 +1,4 @@
+extern crate hyper;
 extern crate phf_codegen;
 #[cfg(feature = "eac")]
 extern crate csv;
