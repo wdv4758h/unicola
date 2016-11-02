@@ -5,11 +5,16 @@ extern crate phf;
 pub mod width;
 #[cfg(feature = "eac")]
 pub mod emoji;
+#[cfg(feature = "ffi")]
+pub mod ffi;
+
 
 #[cfg(feature = "width")]
 pub use width::*;
 #[cfg(feature = "eac")]
 pub use emoji::*;
+#[cfg(feature = "ffi")]
+pub use ffi::*;
 
 
 /// The version of Unicode,

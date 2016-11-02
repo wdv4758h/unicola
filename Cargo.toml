@@ -8,6 +8,10 @@ repository = "https://github.com/wdv4758h/unicola/"
 keywords = ["unicode", "emoji"]
 build = "build.rs"
 
+[lib]
+name = "unicola"
+crate-type = ["dylib", "rlib"]
+
 [workspace]
 members = ["src/core", "src/codegen"]
 
@@ -19,7 +23,8 @@ phf = "0.7.18"
 unicola_core = { path = "src/core" }
 
 [features]
-default = ["width", "eac"]
+default = ["width", "eac", "ffi"]
 pregen = []     # use pre-generated code
 width = []
 eac = ["unicola_codegen/eac"]
+ffi = []
