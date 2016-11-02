@@ -11,7 +11,5 @@ void ffi_emoji_free(char* ptr);
 
 def emoji(code):
     ptr = lib.ffi_emoji_generate(code.encode())
-    try:
-        return ffi.string(ptr).decode('utf-8')
-    finally:
-        lib.ffi_emoji_free(ptr)
+    ptr = ffi.gc(ptr, lib.ffi_emoji_free)
+    return ffi.string(ptr).decode('utf-8')
